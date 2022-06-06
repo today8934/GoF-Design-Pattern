@@ -1,28 +1,19 @@
 package com.example.gofdesignpattern.singleton;
 
 public class Settings {
-
-    private static volatile Settings instance;
-
     private Settings() {}
 
     /*
-    double checked locking
-    메서드에 접근하는 모든 스레드에 대해 synchronized가 걸리는게 아니라
-    if문 안에서 동기화에 걸리기 때문에 메서드에 synchronized 키워드를 붙이는 것보다 성능적으로 우위에 있을 수 있다.
-    (메서드에서부터 동기화에 걸리는것이 아니라 첫번째 if문에서 instance가 null일 경우 바로 instance를 리턴해버리기때문에)
-    인스턴스를 필요한 시점에 만들 수 있음.
-    jdk 1.5부터 동작한다.
+    Static Inner Class
+    멀티 스레드 환경에서도 안전하며, getInstance를 호출할 때 inner class를 호출하므로
+    객체를 미리 만들어 놓지 않아도 된다.
+    (가장 권장하는 싱글톤 패턴 구현 방법)
      */
-    public static Settings getInstance() {
-        if (instance == null) {
-            synchronized (Settings.class) {
-                if (instance == null) {
-                    instance = new Settings();
-                }
-            }
-        }
+    private static class SettingsHolder {
+        private static final Settings INSTANCE = new Settings();
+    }
 
-        return instance;
+    public static Settings getInstance() {
+        return SettingsHolder.INSTANCE;
     }
 }
