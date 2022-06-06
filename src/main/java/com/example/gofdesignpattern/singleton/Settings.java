@@ -2,21 +2,15 @@ package com.example.gofdesignpattern.singleton;
 
 public class Settings {
 
-    private static Settings instance;
+    private static final Settings INSTANCE = new Settings();
 
     private Settings() {}
 
     /*
-    가장 간단한 방법의 Thread-Safe 싱글톤.
-    synchronized 키워드를 이용하여 동시에 하나의 스레드만 해당 메소드에 접근할 수 있게 된다.
-    (하나의 스레드 접근 시 lock이 걸림)
-    하지만 동시에 하나의 스레드만 접근이 가능하므로 성능에 이슈가 있을 수 있음.
+    이른 초기화(Eager Initialization)
+    미리 만들어 놓는다는 것 자체가 단점이 될 수 있다.(만들어놓고 안쓸 수 있음. 리소스 낭비)
      */
-    public static synchronized Settings getInstance() {
-        if (instance == null) {
-            instance = new Settings();
-        }
-
-        return instance;
+    public static Settings getInstance() {
+        return INSTANCE;
     }
 }
