@@ -1,7 +1,5 @@
 package com.example.gofdesignpattern.singleton;
 
-import java.io.Serializable;
-
-public enum Settings {
+public enum EnumSingleton {
     INSTANCE;
 }
