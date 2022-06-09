@@ -1,6 +1,6 @@
 package com.example.gofdesignpattern.singleton;
 
-public class SimpleSingleton {
+public class SimpleSingleton implements Singleton{
     private static SimpleSingleton instance;
     private SimpleSingleton() {}
 
